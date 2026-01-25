@@ -184,7 +184,7 @@ a|
                               │
                               ▼
 
-image::diagrams/the-three-layer-memory-architecture.png[The Three-Layer Memory Architecture]
+image::/diagrams/the-three-layer-memory-architecture.png[The Three-Layer Memory Architecture]
 
 ┌─────────────────────────────────────────────────────────────┐
 │                    Neo4j Graph Database                     │
