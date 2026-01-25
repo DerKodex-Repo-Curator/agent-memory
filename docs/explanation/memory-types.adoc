@@ -39,6 +39,9 @@ a|
 ----
 |===
 
+image::diagrams/memory-architecture.png[Memory Architecture]
+
+
 === Short-Term Memory: What Happened
 
 Short-term memory stores *experiences* - the conversations, messages, and interactions your agent has with users.
@@ -155,6 +158,9 @@ a|
 (ToolCall)-[:TRIGGERED_BY]->(Message)
 ----
 |===
+
+image::diagrams/graph-schema.png[Graph Schema]
+
 
 === Messages → Entities
 

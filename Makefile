@@ -362,23 +362,23 @@ docs-clean:
 
 # List all diagram placeholders in documentation
 docs-diagrams-list:
-	@python scripts/manage_diagrams.py list
+	@uv run python scripts/manage_diagrams.py list
 
 # Show status of all diagrams (which have Excalidraw files)
 docs-diagrams-status:
-	@python scripts/manage_diagrams.py status
+	@uv run python scripts/manage_diagrams.py status
 
 # Show only diagrams missing Excalidraw files
 docs-diagrams-missing:
-	@python scripts/manage_diagrams.py missing
+	@uv run python scripts/manage_diagrams.py missing
 
 # Generate manifest JSON of all diagrams
 docs-diagrams-manifest:
-	@python scripts/manage_diagrams.py manifest
+	@uv run python scripts/manage_diagrams.py manifest
 
 # Add image references to AsciiDoc files for diagrams that have Excalidraw files
 docs-diagrams-add-refs:
-	@python scripts/manage_diagrams.py add-refs
+	@uv run python scripts/manage_diagrams.py add-refs
 
 # Generate diagrams using Claude with Excalidraw skill
 # Usage: make docs-diagrams-generate
@@ -395,7 +395,7 @@ docs-diagrams-generate:
 	@echo "3. Save the JSON to: docs/assets/images/diagrams/excalidraw/[slug].excalidraw"
 	@echo "4. Run: make docs-diagrams-add-refs"
 	@echo ""
-	@python scripts/manage_diagrams.py missing --json 2>/dev/null || python scripts/manage_diagrams.py status
+	@uv run python scripts/manage_diagrams.py missing --json 2>/dev/null || uv run python scripts/manage_diagrams.py status
 
 # =============================================================================
 # Development Shortcuts

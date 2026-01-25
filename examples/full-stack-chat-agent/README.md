@@ -54,6 +54,9 @@ A complete example demonstrating **neo4j-agent-memory** integration with a Pydan
 │ - Preferences   │             │ - People        │
 │ - Traces        │             │ - Organizations │
 └─────────────────┘             └─────────────────┘
+
+![Architecture](docs/assets/images/diagrams/architecture.png)
+
 ```
 
 ## Prerequisites

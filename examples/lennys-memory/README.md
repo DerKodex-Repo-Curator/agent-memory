@@ -159,6 +159,9 @@ Visit http://localhost:3000 to start exploring.
           ▼               ▼             ▼             ▼
 ┌──────────────────────────────────────────────────────────────────────┐
 │                    neo4j-agent-memory                                 │
+
+![Architecture Overview](docs/assets/images/diagrams/architecture-overview.png)
+
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────────┐   │
 │  │  Short-Term  │  │  Long-Term   │  │     Reasoning           │   │
 │  │  Memory      │  │  Memory      │  │     Memory               │   │
@@ -177,6 +180,9 @@ Visit http://localhost:3000 to start exploring.
 │  │   Spatial: Point indexes on Location entities                 │    │
 │  └──────────────────────────────────────────────────────────────┘    │
 └──────────────────────────────────────────────────────────────────────┘
+
+![Architecture Overview](docs/assets/images/diagrams/architecture-overview.png)
+
 ```
 
 ### The Three Memory Types in Action
@@ -388,6 +394,9 @@ Entity stored in Neo4j
 │  4. Get Wikidata ID     │
 │  5. Update Neo4j node   │
 └─────────────────────────┘
+
+![Background Entity Enrichment](docs/assets/images/diagrams/background-entity-enrichment.png)
+
          │
          ▼
 (:Entity:Person {

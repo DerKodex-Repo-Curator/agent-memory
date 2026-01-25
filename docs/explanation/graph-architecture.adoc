@@ -183,6 +183,9 @@ a|
 └───────────────────┴───────────────────┴─────────────────────┘
                               │
                               ▼
+
+image::diagrams/the-three-layer-memory-architecture.png[The Three-Layer Memory Architecture]
+
 ┌─────────────────────────────────────────────────────────────┐
 │                    Neo4j Graph Database                     │
 │                                                             │
@@ -196,6 +199,8 @@ a|
 └─────────────────────────────────────────────────────────────┘
 ----
 |===
+
+image::diagrams/the-three-layer-memory-architecture.png[The Three-Layer Memory Architecture]
 
 === Why One Database?
 

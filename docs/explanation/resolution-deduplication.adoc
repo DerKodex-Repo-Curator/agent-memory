@@ -129,6 +129,9 @@ New Entity: "JP Morgan Chase"
 │   JP Morgan: 0.94       │  ← Flag for review
 │   Morgan Stanley: 0.72  │  ← Different entity
 └─────────────────────────┘
+
+image::diagrams/embedding-based-similarity.png[Embedding-Based Similarity]
+
 ----
 |===
 
