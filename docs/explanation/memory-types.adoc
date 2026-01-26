@@ -196,6 +196,9 @@ Find how entities connect across memory types:
 // Find entities mentioned in messages that triggered successful reasoning
 MATCH (m:Message)-[:MENTIONS]->(e:Entity)
 MATCH (t:ReasoningTrace)-[:INITIATED_BY]->(m)
+
+image::diagrams/relationship-traversal.png[Relationship Traversal]
+
 WHERE t.success = true
 RETURN e.name, count(*) as mentions
 ORDER BY mentions DESC

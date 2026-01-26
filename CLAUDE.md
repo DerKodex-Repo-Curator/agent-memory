@@ -229,6 +229,9 @@ docs/
 ├── reference/           # Information-oriented: API descriptions
 ├── explanation/         # Understanding-oriented: conceptual discussions
 └── build.js             # Node.js build script (Asciidoctor)
+
+![Structure (Diataxis Framework)](docs/assets/images/diagrams/structure-diataxis-framework.png)
+
 ```
 
 ### Building Documentation
@@ -1550,6 +1553,9 @@ docs/
     ├── memory-types.adoc         # The three memory types explained
     ├── poleo-model.adoc          # POLE+O data model concepts
     └── extraction-pipeline.adoc  # How entity extraction works
+
+![Documentation Structure Pipeline](docs/assets/images/diagrams/documentation-structure-pipeline.png)
+
 ```
 
 ### Diataxis Quadrants

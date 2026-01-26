@@ -667,6 +667,9 @@ Entity nodes have additional type labels: `:Person`, `:Organization`, `:Location
 (ReasoningTrace)-[:INITIATED_BY]->(Message)
 (ReasoningTrace)-[:HAS_STEP]->(ReasoningStep)
 (ReasoningStep)-[:USED_TOOL]->(ToolCall)
+
+![Key Relationships](docs/assets/images/diagrams/key-relationships.png)
+
 ```
 
 ### Example Cypher Queries
