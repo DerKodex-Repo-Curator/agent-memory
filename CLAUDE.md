@@ -232,6 +232,9 @@ docs/
 
 ![Structure (Diataxis Framework)](docs/assets/images/diagrams/structure-diataxis-framework.png)
 
+![Structure (Diataxis Framework)](docs/assets/images/diagrams/structure-diataxis-framework.png)
+
+
 ```
 
 ### Building Documentation
@@ -1555,6 +1558,9 @@ docs/
     └── extraction-pipeline.adoc  # How entity extraction works
 
 ![Documentation Structure Pipeline](docs/assets/images/diagrams/documentation-structure-pipeline.png)
+
+![Documentation Structure Pipeline](docs/assets/images/diagrams/documentation-structure-pipeline.png)
+
 
 ```
 
