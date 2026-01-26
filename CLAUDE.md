@@ -263,7 +263,7 @@ make test-docs-build
 
 ### Diagram Management
 
-Documentation diagrams use Excalidraw JSON format stored in `docs/assets/images/diagrams/excalidraw/`.
+Documentation diagrams use Excalidraw JSON format stored in `docs/assets/images/diagrams/excalidraw/`. There are 50+ Excalidraw diagram files in the project.
 
 ```bash
 # List all diagram placeholders in documentation
@@ -283,6 +283,17 @@ make docs-diagrams-add-refs
 ```
 
 The diagram management script is at `scripts/manage_diagrams.py`. Excalidraw files can be created using the Claude Code Excalidraw skill at `.claude/skills/docs-excalidraw/`.
+
+**Diagram Color Palette (Neo4j Brand):**
+- Short-Term Memory: Green (`#b2f2bb` / `#2f9e44`)
+- Long-Term Memory: Neo4j Orange (`#ffec99` / `#F79767`)
+- Reasoning Memory: Neo4j Node Purple (`#d0bfff` / `#C990C0`)
+- Neo4j/Database: Baltic Teal (`#e6f7f7` / `#009999`)
+- Neo4j Labs: Labs Purple (`#e6e6ff` / `#6366F1`)
+- Person Entities: Neo4j Pink (`#ffc9c9` / `#DA7194`)
+- Default/Neutral: Neo4j Gray (`#A5ABB6`)
+
+See `.claude/skills/docs-branding/` and `.claude/skills/neo4j-labs-guidelines/` for full brand guidelines.
 
 ## CLI (Command Line Interface)
 
