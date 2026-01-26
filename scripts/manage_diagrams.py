@@ -7,6 +7,7 @@ relationship to generated Excalidraw JSON files.
 Supported file types:
 - AsciiDoc (.adoc) files in docs/
 - Markdown (.md) files in examples/ and README.md
+- CLAUDE.md in project root
 
 Usage:
     python scripts/manage_diagrams.py list          # List all diagrams
@@ -14,6 +15,7 @@ Usage:
     python scripts/manage_diagrams.py missing       # Show only missing diagrams
     python scripts/manage_diagrams.py manifest      # Generate manifest JSON
     python scripts/manage_diagrams.py add-refs      # Add image references
+    python scripts/manage_diagrams.py generate      # Generate Excalidraw conversion prompts
 """
 
 from __future__ import annotations
@@ -98,10 +100,11 @@ EXCALIDRAW_DIR = DIAGRAMS_DIR / "excalidraw"
 # ASCII box-drawing with + corners: +---+
 
 # Pattern for structured box diagrams using Unicode characters
+# Matches boxes with corners (┌ ┐ └ ┘) and content lines with vertical bars (│ ║)
 UNICODE_BOX_PATTERN = re.compile(
-    r"([ \t]*[┌╔][─═]+[┐╗┬].*\n"  # Top border starting with corner
-    r"(?:.*[│║].*\n)*?"  # Content lines with vertical bars
-    r"[ \t]*[└╚├][─═]+[┘╝┤┴].*)",  # Bottom border with corner
+    r"([ \t]*[┌╔][─═┬]+[┐╗┬].*\n"  # Top border starting with corner
+    r"(?:[ \t]*[│║├┤┬┴┼].*\n)*?"  # Content lines (flexible - can have row separators)
+    r"[ \t]*[└╚][─═┴]+[┘╝].*)",  # Bottom border with corner
     re.MULTILINE,
 )
 
@@ -116,7 +119,24 @@ ASCII_BOX_PATTERN = re.compile(
 
 # Pattern for arrow-based flow diagrams - require vertical arrows (↓ or ▼)
 # to distinguish from inline text with horizontal arrows (→)
-FLOW_DIAGRAM_PATTERN = re.compile(r"((?:.*[↓▼].*\n){2,})", re.MULTILINE)
+# Limit line length to avoid backtracking issues
+FLOW_DIAGRAM_PATTERN = re.compile(r"((?:[^\n]{0,200}[↓▼][^\n]{0,200}\n){2,})", re.MULTILINE)
+
+# Pattern for Cypher-style relationship diagrams
+# Matches patterns like: (Node)-[:RELATIONSHIP]->(Node)
+# Using a simpler pattern to avoid exponential backtracking
+CYPHER_DIAGRAM_PATTERN = re.compile(
+    r"(\([^)]{1,50}\)-\[:[A-Z_]+\]->\([^)]{1,50}\))",
+    re.MULTILINE,
+)
+
+# Pattern for markdown code blocks containing diagrams
+# Matches ```text, ```ascii, ``` followed by box-drawing or flow content
+# Use atomic grouping equivalent to avoid backtracking
+MD_CODE_BLOCK_PATTERN = re.compile(
+    r"```(?:text|ascii|diagram)?\n((?:[^\n`]{0,300}\n){1,100})```",
+    re.MULTILINE,
+)
 
 # Pattern for explicit diagram placeholders (backwards compatibility)
 PLACEHOLDER_PATTERN = re.compile(r"\[DIAGRAM PLACEHOLDER:\s*([^\]]+)\]", re.IGNORECASE)
@@ -252,6 +272,37 @@ def find_diagrams_in_file(file_path: Path, file_type: str) -> list[DiagramInfo]:
         if len(diagram_text.strip()) > 50:
             all_matches.append((match.start(), match.end(), diagram_text, None))
 
+    # Pattern 5: Cypher-style relationship diagrams
+    # Find all Cypher patterns and group consecutive ones
+    cypher_matches = list(CYPHER_DIAGRAM_PATTERN.finditer(content))
+    if len(cypher_matches) >= 2:
+        # Group consecutive matches (within 200 chars of each other)
+        groups = []
+        current_group = [cypher_matches[0]]
+        for m in cypher_matches[1:]:
+            if m.start() - current_group[-1].end() < 200:
+                current_group.append(m)
+            else:
+                if len(current_group) >= 2:
+                    groups.append(current_group)
+                current_group = [m]
+        if len(current_group) >= 2:
+            groups.append(current_group)
+
+        for group in groups:
+            start = group[0].start()
+            end = group[-1].end()
+            diagram_text = content[start:end]
+            all_matches.append((start, end, diagram_text, None))
+
+    # Pattern 6: Markdown code blocks with diagrams
+    # Only check if the block contains diagram-like characters
+    for match in MD_CODE_BLOCK_PATTERN.finditer(content):
+        diagram_text = match.group(1)
+        # Check if it looks like a diagram (has box-drawing or flow chars)
+        if len(diagram_text.strip()) > 50 and any(c in diagram_text for c in "┌┐└┘│─╔╗╚╝║═▼↓"):
+            all_matches.append((match.start(), match.end(), diagram_text, None))
+
     # Deduplicate and process matches
     for match_tuple in all_matches:
         start, end, diagram_text, explicit_title = match_tuple
@@ -332,6 +383,11 @@ def find_all_diagrams() -> list[DiagramInfo]:
     readme_path = PROJECT_ROOT / "README.md"
     if readme_path.exists():
         diagrams.extend(find_diagrams_in_file(readme_path, "md"))
+
+    # Search for CLAUDE.md
+    claude_path = PROJECT_ROOT / "CLAUDE.md"
+    if claude_path.exists():
+        diagrams.extend(find_diagrams_in_file(claude_path, "md"))
 
     # Sort by file path and line number
     return sorted(diagrams, key=lambda d: (str(d.file_path), d.line_number))
@@ -429,6 +485,73 @@ def generate_manifest(diagrams: list[DiagramInfo]) -> dict[str, Any]:
     }
 
 
+def classify_diagram_type(ascii_art: str) -> str:
+    """Classify the type of diagram based on its content."""
+    lower = ascii_art.lower()
+
+    # Check for Cypher patterns
+    if re.search(r"\([^)]+\)\s*-\[:[A-Z_]+\]->\s*\([^)]+\)", ascii_art):
+        return "cypher"
+
+    # Check for sequence diagram patterns
+    if "│" in ascii_art and ("─>" in ascii_art or "→" in ascii_art):
+        lines_with_arrows = sum(1 for line in ascii_art.split("\n") if "→" in line or "->" in line)
+        if lines_with_arrows >= 3:
+            return "sequence"
+
+    # Check for table patterns
+    if ascii_art.count("┼") >= 2 or (ascii_art.count("+") >= 4 and ascii_art.count("-") >= 10):
+        return "table"
+
+    # Check for flowchart patterns
+    if "▼" in ascii_art or "↓" in ascii_art:
+        return "flowchart"
+
+    # Check for architecture patterns
+    if "│" in ascii_art and ("┌" in ascii_art or "╔" in ascii_art or "+" in ascii_art):
+        return "architecture"
+
+    return "diagram"
+
+
+def generate_prompts(diagrams: list[DiagramInfo]) -> None:
+    """Generate structured prompts for Excalidraw conversion."""
+    missing = [d for d in diagrams if not d.has_excalidraw]
+
+    if not missing:
+        print("\nAll diagrams have Excalidraw files! ✓\n")
+        return
+
+    print(f"\n# Excalidraw Conversion Prompts")
+    print(f"# Generated for {len(missing)} missing diagram(s)\n")
+    print("# Use the docs-excalidraw skill to convert each diagram.\n")
+    print("=" * 60)
+
+    for i, d in enumerate(missing, 1):
+        try:
+            rel_path = d.file_path.relative_to(PROJECT_ROOT)
+        except ValueError:
+            rel_path = d.file_path
+
+        diagram_type = classify_diagram_type(d.ascii_art)
+
+        print(f"\n## Diagram {i}: {d.title}")
+        print(f"Source: {rel_path}:{d.line_number}")
+        print(f"Output: {d.expected_excalidraw_path.name}")
+        print(f"Type: {diagram_type}")
+        print(f"\n### ASCII Art:\n```")
+        print(d.ascii_art)
+        print("```")
+        print(f"\n### Instructions:")
+        print(f"Convert this {diagram_type} diagram to Excalidraw JSON following the")
+        print(f"docs-excalidraw skill guidelines. Use Neo4j color palette:")
+        print(f"  - Short-Term Memory: Green (#b2f2bb / #2f9e44)")
+        print(f"  - Long-Term Memory: Yellow (#ffec99 / #f08c00)")
+        print(f"  - Reasoning Memory: Purple (#d0bfff / #9c36b5)")
+        print(f"  - Neo4j/Storage: Blue (#a5d8ff / #1971c2)")
+        print("\n" + "=" * 60)
+
+
 def add_image_reference(diagram: DiagramInfo) -> bool:
     """Add an image reference after the diagram if missing."""
     if diagram.has_image_ref:
@@ -488,7 +611,7 @@ Examples:
     )
     parser.add_argument(
         "command",
-        choices=["list", "status", "missing", "manifest", "add-refs"],
+        choices=["list", "status", "missing", "manifest", "add-refs", "generate"],
         help="Command to run",
     )
     parser.add_argument("--json", action="store_true", help="Output in JSON format")
@@ -536,6 +659,9 @@ Examples:
             if add_image_reference(d):
                 added += 1
         print(f"\nAdded {added} image reference(s)")
+
+    elif args.command == "generate":
+        generate_prompts(diagrams)
 
 
 if __name__ == "__main__":

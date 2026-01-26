@@ -1,0 +1,490 @@
+= Documentation Diagrams
+:toc: left
+:toclevels: 2
+:sectanchors:
+:icons: font
+:source-highlighter: highlight.js
+
+This page catalogs all diagrams in the neo4j-agent-memory documentation, tracking ASCII art diagrams and their Excalidraw conversions.
+
+== Diagram Workflow
+
+The documentation uses a structured workflow for managing diagrams:
+
+1. **ASCII Art Source**: Diagrams are initially created as ASCII art in documentation files
+2. **Excalidraw Conversion**: ASCII diagrams are converted to Excalidraw JSON format
+3. **PNG Export**: Excalidraw files are exported to PNG for display in docs
+4. **Image Reference**: Documentation files include image references to the PNG
+
+=== Tools
+
+* `make docs-diagrams-status` - Show all diagrams and their Excalidraw status
+* `make docs-diagrams-missing` - Show diagrams without Excalidraw files
+* `make docs-diagrams-add-refs` - Add image references to documentation files
+* `make docs-diagrams-generate` - Generate prompts for creating missing Excalidraw files
+
+=== File Locations
+
+* **Excalidraw JSON**: `docs/assets/images/diagrams/excalidraw/*.excalidraw`
+* **PNG Exports**: `docs/assets/images/diagrams/*.png`
+* **Management Script**: `scripts/manage_diagrams.py`
+
+== Existing Diagrams
+
+The following ASCII art diagrams have been detected in the documentation (36 total):
+
+=== Core Documentation
+
+[cols="1,3,1,2,1,1"]
+|===
+|# |File |Line |Title |Type |Status
+
+|1
+|xref:index.adoc[index.adoc]
+|304
+|Architecture Pipeline
+|Architecture
+|icon:check[role=green]
+
+|2
+|xref:entity-extraction.adoc[entity-extraction.adoc]
+|66
+|Pipeline Architecture
+|Flowchart
+|icon:check[role=green]
+|===
+
+=== Explanation Section
+
+[cols="1,3,1,2,1,1"]
+|===
+|# |File |Line |Title |Type |Status
+
+|3
+|xref:explanation/memory-types.adoc[explanation/memory-types.adoc]
+|25
+|Memory Architecture
+|Architecture
+|icon:check[role=green]
+
+|4
+|xref:explanation/memory-types.adoc[explanation/memory-types.adoc]
+|35
+|A Three-Layer Solution
+|Architecture
+|icon:check[role=green]
+
+|5
+|xref:explanation/memory-types.adoc[explanation/memory-types.adoc]
+|147
+|Graph Schema
+|Cypher/Graph
+|icon:check[role=green]
+
+|6
+|xref:explanation/memory-types.adoc[explanation/memory-types.adoc]
+|152
+|How They Connect
+|Cypher/Graph
+|icon:check[role=green]
+
+|7
+|xref:explanation/memory-types.adoc[explanation/memory-types.adoc]
+|197
+|Relationship Traversal
+|Cypher
+|icon:times[role=red]
+
+|8
+|xref:explanation/extraction-pipeline.adoc[explanation/extraction-pipeline.adoc]
+|24
+|Extraction Pipeline
+|Flowchart
+|icon:check[role=green]
+
+|9
+|xref:explanation/extraction-pipeline.adoc[explanation/extraction-pipeline.adoc]
+|31
+|Three Extraction Approaches Pipeline
+|Flowchart
+|icon:check[role=green]
+
+|10
+|xref:explanation/extraction-pipeline.adoc[explanation/extraction-pipeline.adoc]
+|49
+|Three Extraction Approaches
+|Flowchart
+|icon:check[role=green]
+
+|11
+|xref:explanation/poleo-model.adoc[explanation/poleo-model.adoc]
+|16
+|Person, Object, Location, Event + Organization
+|Table
+|icon:check[role=green]
+
+|12
+|xref:explanation/poleo-model.adoc[explanation/poleo-model.adoc]
+|310
+|Relationships
+|Cypher/Graph
+|icon:times[role=red]
+
+|13
+|xref:explanation/resolution-deduplication.adoc[explanation/resolution-deduplication.adoc]
+|62
+|1. Relationship Integrity
+|Cypher/Graph
+|icon:times[role=red]
+
+|14
+|xref:explanation/resolution-deduplication.adoc[explanation/resolution-deduplication.adoc]
+|125
+|Embedding-Based Similarity
+|Flowchart
+|icon:check[role=green]
+
+|15
+|xref:explanation/resolution-deduplication.adoc[explanation/resolution-deduplication.adoc]
+|265
+|Keep Primary (Default)
+|Cypher/Graph
+|icon:times[role=red]
+
+|16
+|xref:explanation/resolution-deduplication.adoc[explanation/resolution-deduplication.adoc]
+|446
+|Subsidiary Relationships
+|Cypher/Graph
+|icon:times[role=red]
+
+|17
+|xref:explanation/graph-architecture.adoc[explanation/graph-architecture.adoc]
+|64
+|1. Natural Relationship Modeling
+|Cypher/Graph
+|icon:times[role=red]
+
+|18
+|xref:explanation/graph-architecture.adoc[explanation/graph-architecture.adoc]
+|189
+|The Three-Layer Memory Architecture
+|Architecture
+|icon:check[role=green]
+
+|19
+|xref:explanation/graph-architecture.adoc[explanation/graph-architecture.adoc]
+|247
+|Data Model
+|Cypher/Graph
+|icon:times[role=red]
+
+|20
+|xref:explanation/graph-architecture.adoc[explanation/graph-architecture.adoc]
+|339
+|Example Queries
+|Cypher
+|icon:times[role=red]
+
+|21
+|xref:explanation/graph-architecture.adoc[explanation/graph-architecture.adoc]
+|356
+|Inventory-Aware Recommendations
+|Cypher
+|icon:times[role=red]
+|===
+
+=== How-To Guides
+
+[cols="1,3,1,2,1,1"]
+|===
+|# |File |Line |Title |Type |Status
+
+|22
+|xref:how-to/integrations/llamaindex.adoc[how-to/integrations/llamaindex.adoc]
+|22
+|Overview
+|Architecture
+|icon:check[role=green]
+
+|23
+|xref:how-to/integrations/llamaindex.adoc[how-to/integrations/llamaindex.adoc]
+|415
+|Financial Document Assistant
+|Cypher/Graph
+|icon:times[role=red]
+
+|24
+|xref:how-to/integrations/pydantic-ai.adoc[how-to/integrations/pydantic-ai.adoc]
+|608
+|Financial Advisory Agent
+|Cypher/Graph
+|icon:times[role=red]
+
+|25
+|xref:how-to/integrations/crewai.adoc[how-to/integrations/crewai.adoc]
+|405
+|Financial Services Multi-Agent System
+|Cypher/Graph
+|icon:times[role=red]
+
+|26
+|xref:how-to/preferences.adoc[how-to/preferences.adoc]
+|529
+|Learn from Behavior Patterns
+|Cypher
+|icon:times[role=red]
+
+|27
+|xref:how-to/preferences.adoc[how-to/preferences.adoc]
+|593
+|Filter Products by Preferences
+|Cypher
+|icon:times[role=red]
+|===
+
+=== Example READMEs
+
+[cols="1,3,1,2,1,1"]
+|===
+|# |File |Line |Title |Type |Status
+
+|28
+|link:../examples/lennys-memory/README.md[examples/lennys-memory/README.md]
+|165
+|Architecture Overview
+|Architecture
+|icon:check[role=green]
+
+|29
+|link:../examples/lennys-memory/README.md[examples/lennys-memory/README.md]
+|387
+|Background Entity Enrichment
+|Flowchart
+|icon:check[role=green]
+
+|30
+|link:../examples/lennys-memory/README.md[examples/lennys-memory/README.md]
+|657
+|Key Relationships
+|Cypher/Graph
+|icon:times[role=red]
+
+|31
+|link:../examples/full-stack-chat-agent/README.md[examples/full-stack-chat-agent/README.md]
+|26
+|Memory Context Panel
+|Architecture
+|icon:check[role=green]
+
+|32
+|link:../examples/full-stack-chat-agent/README.md[examples/full-stack-chat-agent/README.md]
+|48
+|Architecture
+|Architecture
+|icon:check[role=green]
+
+|33
+|link:../examples/full-stack-chat-agent/README.md[examples/full-stack-chat-agent/README.md]
+|149
+|News Graph Setup
+|Cypher/Graph
+|icon:times[role=red]
+|===
+
+=== Other Files
+
+[cols="1,3,1,2,1,1"]
+|===
+|# |File |Line |Title |Type |Status
+
+|34
+|link:../CLAUDE.md[CLAUDE.md]
+|225
+|Structure (Diataxis Framework)
+|Architecture
+|icon:times[role=red]
+
+|35
+|link:../CLAUDE.md[CLAUDE.md]
+|1522
+|Documentation Structure Pipeline
+|Flowchart
+|icon:times[role=red]
+
+|36
+|link:../README.md[README.md]
+|1058
+|Short-term memory
+|Cypher/Graph
+|icon:times[role=red]
+|===
+
+=== Status Summary
+
+* icon:check[role=green] **17 diagrams** have Excalidraw files
+* icon:times[role=red] **19 diagrams** missing Excalidraw files
+
+== Existing Excalidraw Files
+
+The following Excalidraw files exist in `docs/assets/images/diagrams/excalidraw/`:
+
+[cols="1,2,2"]
+|===
+|# |Excalidraw File |PNG Export
+
+|1
+|`a-three-layer-solution.excalidraw`
+|`a-three-layer-solution.png`
+
+|2
+|`architecture-overview.excalidraw`
+|`architecture-overview.png`
+
+|3
+|`architecture-pipeline.excalidraw`
+|_(needs export)_
+
+|4
+|`architecture.excalidraw`
+|`architecture.png`
+
+|5
+|`background-entity-enrichment.excalidraw`
+|`background-entity-enrichment.png`
+
+|6
+|`embedding-based-similarity.excalidraw`
+|`embedding-based-similarity.png`
+
+|7
+|`extraction-pipeline.excalidraw`
+|`extraction-pipeline.png`
+
+|8
+|`graph-schema.excalidraw`
+|`graph-schema.png`
+
+|9
+|`how-they-connect.excalidraw`
+|_(needs export)_
+
+|10
+|`memory-architecture.excalidraw`
+|`memory-architecture.png`
+
+|11
+|`memory-context-panel.excalidraw`
+|_(needs export)_
+
+|12
+|`overview.excalidraw`
+|`overview.png`
+
+|13
+|`person-object-location-event-organization.excalidraw`
+|_(needs export)_
+
+|14
+|`pipeline-architecture.excalidraw`
+|`pipeline-architecture.png`
+
+|15
+|`the-three-layer-memory-architecture.excalidraw`
+|`the-three-layer-memory-architecture.png`
+
+|16
+|`three-extraction-approaches-pipeline.excalidraw`
+|`three-extraction-approaches-pipeline.png`
+
+|17
+|`three-extraction-approaches.excalidraw`
+|`three-extraction-approaches.png`
+|===
+
+== Potential New Diagrams
+
+The following diagrams could add value to the documentation if created:
+
+[cols="1,3,1,2,3"]
+|===
+|# |File |Line |Suggested Title |Description
+
+|1
+|xref:tutorials/first-agent-memory.adoc[tutorials/first-agent-memory.adoc]
+|~1
+|Getting Started Flow
+|Step-by-step setup and first usage flow
+
+|2
+|xref:reference/configuration.adoc[reference/configuration.adoc]
+|~1
+|Configuration Hierarchy
+|Show config loading order (env vars, settings, defaults)
+
+|3
+|xref:explanation/poleo-model.adoc[explanation/poleo-model.adoc]
+|~50
+|POLE+O Entity Relationships
+|Show how different entity types relate to each other
+
+|4
+|link:../examples/lennys-memory/README.md[examples/lennys-memory/README.md]
+|~460
+|Frontend Component Hierarchy
+|React component structure for the demo app
+
+|5
+|xref:how-to/deduplication.adoc[how-to/deduplication.adoc]
+|~1
+|Deduplication Workflow
+|Show merge decision flow (auto-merge, flag, reject)
+
+|6
+|xref:how-to/batch-processing.adoc[how-to/batch-processing.adoc]
+|~1
+|Batch Processing Pipeline
+|Show parallel processing flow for large documents
+|===
+
+== Diagram Style Guidelines
+
+When creating new diagrams, follow these guidelines:
+
+=== Neo4j Color Palette
+
+Use consistent colors for memory types:
+
+[cols="2,2,2"]
+|===
+|Memory Type |Background |Stroke
+
+|Short-Term Memory
+|`#b2f2bb` (light green)
+|`#2f9e44` (green)
+
+|Long-Term Memory
+|`#ffec99` (light yellow)
+|`#f08c00` (orange)
+
+|Reasoning Memory
+|`#d0bfff` (light purple)
+|`#9c36b5` (purple)
+
+|Neo4j/Storage
+|`#a5d8ff` (light blue)
+|`#1971c2` (blue)
+|===
+
+=== Diagram Types
+
+* **Architecture**: Use rectangles with hierarchy (top-level -> components -> storage)
+* **Flowchart**: Use vertical flow with colored boxes and arrows
+* **Cypher/Graph**: Use ellipses for nodes, labeled arrows for relationships
+* **Sequence**: Use vertical lifelines with horizontal message arrows
+* **Table**: Use rectangles arranged in grid with headers
+
+=== See Also
+
+* link:../.claude/skills/docs-excalidraw/SKILL.md[Excalidraw Generation Skill] - Full Excalidraw JSON format guide
+* link:../scripts/manage_diagrams.py[Diagram Management Script] - Python script for tracking diagrams
