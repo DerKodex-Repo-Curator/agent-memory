@@ -234,6 +234,9 @@ docs/
 
 ![Structure (Diataxis Framework)](docs/assets/images/diagrams/structure-diataxis-framework.png)
 
+![Structure (Diataxis Framework)](docs/assets/images/diagrams/structure-diataxis-framework.png)
+
+
 
 ```
 
@@ -1560,6 +1563,9 @@ docs/
 ![Documentation Structure Pipeline](docs/assets/images/diagrams/documentation-structure-pipeline.png)
 
 ![Documentation Structure Pipeline](docs/assets/images/diagrams/documentation-structure-pipeline.png)
+
+![Documentation Structure Pipeline](docs/assets/images/diagrams/documentation-structure-pipeline.png)
+
 
 
 ```

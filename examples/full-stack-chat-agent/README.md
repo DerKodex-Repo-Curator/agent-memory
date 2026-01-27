@@ -61,6 +61,9 @@ A complete example demonstrating **neo4j-agent-memory** integration with a Pydan
 
 ![Memory Context Panel](docs/assets/images/diagrams/memory-context-panel.png)
 
+![Memory Context Panel](docs/assets/images/diagrams/memory-context-panel.png)
+
+
 
 
 ```
