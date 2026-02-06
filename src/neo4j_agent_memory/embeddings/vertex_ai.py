@@ -18,7 +18,6 @@ if TYPE_CHECKING:
 # Model dimensions mapping
 VERTEX_MODEL_DIMENSIONS = {
     "text-embedding-004": 768,
-    "text-embedding-005": 768,
     "textembedding-gecko@003": 768,
     "textembedding-gecko@002": 768,
     "textembedding-gecko@001": 768,
