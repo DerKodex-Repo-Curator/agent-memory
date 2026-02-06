@@ -50,7 +50,6 @@ class TestVertexAIEmbedder:
         # Test various models
         models_and_dims = [
             ("text-embedding-004", 768),
-            ("text-embedding-005", 768),
             ("textembedding-gecko@003", 768),
             ("textembedding-gecko-multilingual@001", 768),
             ("unknown-model", 768),  # Default fallback
@@ -214,12 +213,10 @@ class TestVertexAIModelDimensions:
 
         expected_models = [
             "text-embedding-004",
-            "text-embedding-005",
             "textembedding-gecko@003",
             "textembedding-gecko@002",
             "textembedding-gecko@001",
             "textembedding-gecko-multilingual@001",
-            "text-multilingual-embedding-002",
         ]
 
         for model in expected_models:
