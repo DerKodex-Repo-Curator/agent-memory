@@ -189,12 +189,14 @@ class VertexAIEmbedder(BaseEmbedder):
             for i in range(0, len(texts), self._batch_size):
                 batch = texts[i : i + self._batch_size]
                 # Wrap texts with task_type using TextEmbeddingInput
-                input_objs: list[str | TextEmbeddingInput] = [
+                input_objs = [
                     TextEmbeddingInput(text, task_type=self._task_type) for text in batch
                 ]
 
                 # Run synchronous Vertex AI API call in thread pool to avoid blocking event loop
-                embeddings = await asyncio.to_thread(model.get_embeddings, input_objs)
+                embeddings = await asyncio.to_thread(
+                    model.get_embeddings, input_objs  # type: ignore[arg-type]
+                )
                 all_embeddings.extend([e.values for e in embeddings])
 
             return all_embeddings
