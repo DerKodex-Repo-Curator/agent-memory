@@ -15,12 +15,10 @@ from google.genai import types
 
 from ...agents.supervisor import get_supervisor_agent
 from ...models.investigation import (
-    AgentFinding,
     AuditTrailEntry,
     Investigation,
     InvestigationCreate,
     InvestigationStatus,
-    InvestigationType,
 )
 from ...services.memory_service import FinancialMemoryService, get_memory_service
 from ...tools.kyc_tools import SAMPLE_CUSTOMERS
