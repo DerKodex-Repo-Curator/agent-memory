@@ -67,6 +67,8 @@ OPENAI_API_KEY=sk-your-key
 
 ```bash
 cd backend
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -95,23 +97,7 @@ cd backend
 python main.py
 ```
 
-### 5. Install Frontend Dependencies
-
-```bash
-cd frontend
-npm install
-```
-
-### 6. Start the Frontend
-
-```bash
-cd frontend
-npm run dev
-```
-
-Open http://localhost:3000 in your browser.
-
-### 7. Run Smoke Tests (Optional)
+### 5. Run Smoke Tests (Optional)
 
 With the backend running, verify all endpoints are working:
 
@@ -125,6 +111,22 @@ You can also point at a different host:
 ```bash
 python test_backend.py --base-url http://localhost:9000
 ```
+
+### 6. Install Frontend Dependencies
+
+```bash
+cd frontend
+npm install
+```
+
+### 7. Start the Frontend
+
+```bash
+cd frontend
+npm run dev
+```
+
+Open http://localhost:3000 in your browser.
 
 ## Example Conversations
 
@@ -290,9 +292,9 @@ OPENAI_API_KEY=sk-... python -m data.load_products
 
 The backend falls back to text search (`CONTAINS`) when vector search fails, so the app will still work without embeddings.
 
-### Backend dependencies install from local source
+### Backend dependencies
 
-`requirements.txt` installs `neo4j-agent-memory` from the local repo root (`../../../[openai,microsoft-agent]`). Make sure you're running `pip install -r requirements.txt` from the `backend/` directory so the relative path resolves correctly.
+`requirements.txt` installs `neo4j-agent-memory` from PyPI. Make sure you're running `pip install -r requirements.txt` from the `backend/` directory with your virtual environment activated.
 
 ### GDS algorithms not available
 

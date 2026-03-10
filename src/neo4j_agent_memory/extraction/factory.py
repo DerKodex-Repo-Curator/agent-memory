@@ -165,6 +165,7 @@ def create_llm_extractor(
     return LLMEntityExtractor(
         model=extraction_config.llm_model,
         entity_types=entity_types,
+        temperature=extraction_config.llm_temperature,
         extract_relations=extraction_config.extract_relations,
         extract_preferences=extraction_config.extract_preferences,
     )
@@ -334,6 +335,7 @@ class ExtractorBuilder:
         self._gliner_device = "cpu"
         self._gliner_schema: str | None = None
         self._llm_model = "gpt-4o-mini"
+        self._llm_temperature = 0.0
         self._merge_strategy = MergeStrategy.CONFIDENCE
         self._entity_types: list[str] = [
             "PERSON",
@@ -390,10 +392,13 @@ class ExtractorBuilder:
         self._gliner_schema = schema_name
         return self
 
-    def with_llm_fallback(self, model: str = "gpt-4o-mini") -> "ExtractorBuilder":
+    def with_llm_fallback(
+        self, model: str = "gpt-4o-mini", temperature: float = 0.0
+    ) -> "ExtractorBuilder":
         """Add LLM extractor as fallback."""
         self._enable_llm = True
         self._llm_model = model
+        self._llm_temperature = temperature
         return self
 
     def with_entity_types(self, types: list[str]) -> "ExtractorBuilder":
@@ -473,6 +478,7 @@ class ExtractorBuilder:
                 LLMEntityExtractor(
                     model=self._llm_model,
                     entity_types=self._entity_types,
+                    temperature=self._llm_temperature,
                     extract_relations=self._extract_relations,
                     extract_preferences=self._extract_preferences,
                 )

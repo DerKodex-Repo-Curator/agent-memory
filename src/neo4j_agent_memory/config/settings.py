@@ -201,6 +201,12 @@ class ExtractionConfig(BaseModel):
 
     # LLM settings (for LLM extractor or fallback)
     llm_model: str = Field(default="gpt-4o-mini", description="LLM model for extraction")
+    llm_temperature: float = Field(
+        default=0.0,
+        ge=0.0,
+        le=2.0,
+        description="Temperature for LLM extraction (some models like gpt-5-mini only support 1.0)",
+    )
 
     # General extraction settings
     entity_types: list[str] = Field(
