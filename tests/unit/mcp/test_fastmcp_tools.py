@@ -310,6 +310,7 @@ class TestExtendedToolExecution:
     @pytest.mark.asyncio
     async def test_memory_get_entity_not_found(self, server, mock_client):
         mock_client.long_term.search_entities = AsyncMock(return_value=[])
+        mock_client.graph.execute_read = AsyncMock(return_value=[])
 
         async with Client(server) as client:
             result = await client.call_tool("memory_get_entity", {"name": "Unknown"})
