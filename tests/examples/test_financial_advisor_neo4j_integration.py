@@ -859,12 +859,12 @@ class TestToolFunctions:
 
 
 class TestAgentWiring:
-    """Test bind_tool function — loaded directly from agents/__init__.py."""
+    """Test bind_tool function — loaded directly from agents/utils.py."""
 
     def _get_bind_tool(self):
-        """Extract bind_tool from agents/__init__.py without triggering ADK imports."""
+        """Extract bind_tool from agents/utils.py without triggering ADK imports."""
         # Read the source and extract just the bind_tool function
-        source = (BACKEND_SRC / "agents" / "__init__.py").read_text()
+        source = (BACKEND_SRC / "agents" / "utils.py").read_text()
         # Build a minimal module with just bind_tool
         code = """
 import inspect
@@ -937,6 +937,24 @@ from functools import wraps
         sig = inspect.signature(bound)
         param_names = list(sig.parameters.keys())
         assert param_names == ["a", "b", "c"]
+
+    def test_bind_tool_requires_neo4j_service_param(self):
+        _bind_tool = self._get_bind_tool()
+
+        async def invalid_tool(customer_id: str) -> dict:
+            return {"customer_id": customer_id}
+
+        with pytest.raises(TypeError, match="must accept a 'neo4j_service' parameter"):
+            _bind_tool(invalid_tool, MagicMock())
+
+    def test_bind_tool_requires_async_function(self):
+        _bind_tool = self._get_bind_tool()
+
+        def invalid_tool(customer_id: str, *, neo4j_service: Any) -> dict:
+            return {"customer_id": customer_id}
+
+        with pytest.raises(TypeError, match="must be an async function"):
+            _bind_tool(invalid_tool, MagicMock())
 
 
 # ============================================================================
@@ -1216,9 +1234,8 @@ class TestNewFileStructure:
             )
 
     def test_agent_files_have_bind_tool(self, app_dir):
-        # bind_tool is now imported from the agents package __init__.py
-        init_content = (app_dir / "backend" / "src" / "agents" / "__init__.py").read_text()
-        assert "def bind_tool(" in init_content, "__init__.py missing bind_tool"
+        utils_content = (app_dir / "backend" / "src" / "agents" / "utils.py").read_text()
+        assert "def bind_tool(" in utils_content, "utils.py missing bind_tool"
 
         for agent_file in [
             "kyc_agent.py",
@@ -1227,7 +1244,7 @@ class TestNewFileStructure:
             "compliance_agent.py",
         ]:
             content = (app_dir / "backend" / "src" / "agents" / agent_file).read_text()
-            assert "bind_tool" in content, f"{agent_file} missing bind_tool import"
+            assert "from .utils import bind_tool" in content, f"{agent_file} missing bind_tool import"
 
     def test_main_initializes_neo4j_service(self, app_dir):
         content = (app_dir / "backend" / "src" / "main.py").read_text()

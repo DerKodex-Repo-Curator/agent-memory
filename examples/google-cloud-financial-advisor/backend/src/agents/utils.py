@@ -12,6 +12,11 @@ def bind_tool(func, neo4j_service):
     modified signature that hides neo4j_service entirely.
     """
     sig = inspect.signature(func)
+    if "neo4j_service" not in sig.parameters:
+        raise TypeError(f"{func.__name__} must accept a 'neo4j_service' parameter")
+    if not inspect.iscoroutinefunction(func):
+        raise TypeError(f"{func.__name__} must be an async function")
+
     new_params = [p for name, p in sig.parameters.items() if name != "neo4j_service"]
 
     @wraps(func)
