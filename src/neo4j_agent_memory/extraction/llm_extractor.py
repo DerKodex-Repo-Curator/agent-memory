@@ -424,7 +424,16 @@ class LLMEntityExtractor(EntityExtractor):
                 len(dropped),
                 ", ".join(dropped),
             )
-            kept.append("- Other types: " + ", ".join(dropped))
+            other_line = "- Other types: " + ", ".join(dropped)
+            used = len("\n".join(kept))
+            available = cap - used - (1 if kept else 0)
+            if available > 0:
+                if len(other_line) > available:
+                    if available == 1:
+                        other_line = "…"
+                    else:
+                        other_line = f"{other_line[: available - 1].rstrip()}…"
+                kept.append(other_line)
         return "\n".join(kept)
 
     def _render_relation_block(self) -> str:

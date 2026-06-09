@@ -296,7 +296,8 @@ drive extraction on both the GLiNER and (as of v0.6) the LLM path:
 
 |`name`
 |`str`
-|Entity type name, e.g. `DECISION`. Uppercased and used as a Neo4j label.
+|Entity type name, e.g. `DECISION`. Stored uppercase in the `type` property and
+converted to a PascalCase Neo4j label (for example, `:Decision`).
 
 |`description`
 |`str \| None`

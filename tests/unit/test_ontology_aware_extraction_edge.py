@@ -344,6 +344,15 @@ class TestCapBoundaries:
             assert f"T{i}" in block
         assert "Examples:" not in block
 
+    def test_name_only_overflow_line_respects_global_cap(self):
+        specs = [
+            EntityTypeConfig(name=f"VERY_LONG_TYPE_NAME_{i}", description="d " * 50, examples=["x"])
+            for i in range(50)
+        ]
+        ex = LLMEntityExtractor(provider=object(), entity_types=specs, max_typed_block_chars=40)
+        block = ex._render_typed_block(ex._type_specs)
+        assert len(block) <= 40
+
 
 # --------------------------------------------------------------------------- #
 # Constrained payload — relations

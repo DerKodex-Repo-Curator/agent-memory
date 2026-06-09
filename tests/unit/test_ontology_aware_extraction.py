@@ -266,8 +266,8 @@ class TestRenderingCaps:
         ]
         ex = LLMEntityExtractor(provider=object(), entity_types=specs, max_typed_block_chars=120)
         block = ex._render_typed_block(ex._type_specs)
-        assert len(block) <= 200  # bounded
-        assert "Other types:" in block  # overflow rendered as name-only
+        assert len(block) <= 120
+        assert block.splitlines()[-1].startswith("- Other")  # overflow rendered as name-only
 
 
 # --------------------------------------------------------------------------- #
