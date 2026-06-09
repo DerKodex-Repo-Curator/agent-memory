@@ -433,7 +433,8 @@ class LLMEntityExtractor(EntityExtractor):
                         other_line = "…"
                     else:
                         other_line = f"{other_line[: available - 1].rstrip()}…"
-                kept.append(other_line)
+                if other_line and len(other_line) <= available:
+                    kept.append(other_line)
         return "\n".join(kept)
 
     def _render_relation_block(self) -> str:
