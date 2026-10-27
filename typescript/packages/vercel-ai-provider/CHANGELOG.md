@@ -3,7 +3,7 @@
 Releases before 0.3.0 predate this file; see the
 [GitHub releases](https://github.com/neo4j-labs/agent-memory/releases) for those.
 
-## Unreleased
+## 0.5.0 — 2026-10-27
 
 ### Breaking
 
