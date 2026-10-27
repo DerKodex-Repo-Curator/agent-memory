@@ -18,7 +18,7 @@ One eval, [`evals/memory.eval.ts`](evals/memory.eval.ts), checks that:
    entities, and
 6. NAMS rejected no request.
 
-The provider's `eve` peer range is open (`>=0.69.0`), so run it on each new
+The provider's `eve` peer range is open (`>=0.84.0`), so run it on each new
 eve minor.
 
 ## Run

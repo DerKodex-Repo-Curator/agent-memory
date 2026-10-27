@@ -4,14 +4,13 @@ import type { ModelMessage } from 'ai';
 import type { Conversation, MemoryClient, Message } from '@neo4j-labs/agent-memory';
 import {
   defineMemoryProvider,
-  type MemoryOperationContext,
   type MemoryProvider,
   type MemoryRecallResult,
   type MemoryToolsContext,
   type MemoryTurnCompletedContext,
-  type MemoryTurnContext,
+  type MemoryTurnStartedContext,
 } from 'eve/memory';
-import { defineDurableCallback, defineTool } from 'eve/tools';
+import { defineTool } from 'eve/tools';
 import { getLogger, interleave, makeClient, searchUserEntities, searchWithFallback } from './vercel-ai-provider-client';
 import type { MemoryHit, NamsLogger } from './vercel-ai-provider-types';
 
@@ -366,15 +365,13 @@ export function namsMemory(options: NamsEveMemoryOptions = {}): MemoryProvider {
   }
 
   /** Recall hook: the memory record for a turn, cached per operation; non-fatal errors degrade to a placeholder. */
-  async function recall(
-    ctx: MemoryOperationContext & { readonly turn: MemoryTurnContext | null },
-  ): Promise<MemoryRecallResult> {
+  async function recall(ctx: MemoryTurnStartedContext): Promise<MemoryRecallResult> {
     const replayed = recalls.get(ctx.operationId);
     if (replayed) return replayed;
 
     const nams = getClient();
     const where = { scopeKey: ctx.memory.scope.key, slot: ctx.memory.slot };
-    const query = ctx.turn ? userText(ctx.turn.input) : '';
+    const query = userText(ctx.turn.input);
 
     let content: string;
     try {
@@ -495,18 +492,12 @@ export function namsMemory(options: NamsEveMemoryOptions = {}): MemoryProvider {
       search: defineTool({
         description: SEARCH_DESCRIPTION,
         inputSchema: SEARCH_INPUT,
-        execute: defineDurableCallback({
-          closure,
-          callback: (scope: ToolScope, input: Record<string, unknown>) => search(scope, input),
-        }),
+        execute: (input: Record<string, unknown>) => search(closure, input),
       }),
       remember: defineTool({
         description: REMEMBER_DESCRIPTION,
         inputSchema: REMEMBER_INPUT,
-        execute: defineDurableCallback({
-          closure,
-          callback: (scope: ToolScope, input: Record<string, unknown>) => rememberNote(scope, input),
-        }),
+        execute: (input: Record<string, unknown>) => rememberNote(closure, input),
       }),
     };
   }
@@ -514,7 +505,6 @@ export function namsMemory(options: NamsEveMemoryOptions = {}): MemoryProvider {
   return defineMemoryProvider({
     recall: {
       'turn.started': recall,
-      'compaction.completed': recall,
     },
     capture: {
       'turn.completed': capture,

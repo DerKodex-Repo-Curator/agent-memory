@@ -19,7 +19,7 @@ export default defineEval<typeof config>({
     const first = await t.send("remember that I prefer aisle seats");
     t.succeeded();
     t.calledTool("nams__remember");
-    t.check(first.message, includes("remembered"));
+    t.check(first.reply, includes("remembered"));
 
     // The chat was saved, under this user's id.
     const captured = await until(() =>
@@ -42,13 +42,13 @@ export default defineEval<typeof config>({
 
     // Chat 2: the model sees the note and the user's own entities before it answers.
     const second = await t.send("what do you know about me?");
-    t.check(second.message, includes("recalled:"));
-    t.check(second.message, includes("Prefers aisle seats"));
-    t.check(second.message, includes("From this user's knowledge graph"));
-    t.check(second.message, includes("Aisle seat — Seat this user books"));
-    const leaked = (second.message ?? "").includes("Window seat");
+    t.check(second.reply, includes("recalled:"));
+    t.check(second.reply, includes("Prefers aisle seats"));
+    t.check(second.reply, includes("From this user's knowledge graph"));
+    t.check(second.reply, includes("Aisle seat — Seat this user books"));
+    const leaked = (second.reply ?? "").includes("Window seat");
     t.check(leaked, equals(false));
-    t.log(`recall reply: ${second.message}`);
+    t.log(`recall reply: ${second.reply}`);
 
     // Every entity search was scoped to this user.
     t.check(nams.entitySearches.length > 0, equals(true));
@@ -57,10 +57,10 @@ export default defineEval<typeof config>({
     // Search finds the note and the earlier chat.
     const third = await second.session.send("search my memory");
     t.calledTool("nams__search");
-    t.check(third.message, includes('"from":"saved note"'));
-    t.check(third.message, includes('"from":"earlier session"'));
-    t.check(third.message, includes('"entities":["Aisle seat — Seat this user books"]'));
-    t.log(`search reply: ${third.message}`);
+    t.check(third.reply, includes('"from":"saved note"'));
+    t.check(third.reply, includes('"from":"earlier session"'));
+    t.check(third.reply, includes('"entities":["Aisle seat — Seat this user books"]'));
+    t.log(`search reply: ${third.reply}`);
 
     // NAMS turned nothing away.
     t.check(nams.rejected, equals([]));

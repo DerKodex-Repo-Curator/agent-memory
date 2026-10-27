@@ -5,6 +5,21 @@ Releases before 0.3.0 predate this file; see the
 
 ## Unreleased
 
+### Breaking
+
+- **eve 0.84.0 or later.** eve 0.84.0 removed `defineDurableCallback` and
+  compaction recall, and rejects a memory provider that registers
+  `recall["compaction.completed"]`. Provider 0.4.0 used both, so its `/eve`
+  entry point fails to import on eve 0.84.0 (`does not provide an export named
+  'defineDurableCallback'`). The tools are now plain functions, recall runs on
+  `turn.started` only, and the optional `eve` peer is `>=0.84.0`. Stay on 0.4.0
+  for eve 0.69.0 to 0.83.x.
+
+### Changed
+
+- `examples/eve-memory-eval` runs on eve 0.84.0, whose eval turns expose the
+  answer as `reply` instead of `message`. All 17 checks pass.
+
 ## 0.4.0 — 2026-10-22
 
 Requires `@neo4j-labs/agent-memory` 0.6.0, the release with the message-search

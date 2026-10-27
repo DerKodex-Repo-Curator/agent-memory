@@ -274,7 +274,7 @@ the optional `eve` peer.
 | Export | Signature
 
 | `namsMemory(options?: NamsEveMemoryOptions)`
-| Returns an eve `MemoryProvider` for `defineMemory({ provider })`: `recall` on `turn.started` and `compaction.completed`, `capture` on `turn.completed`, and `tools` returning `search` and `remember`.
+| Returns an eve `MemoryProvider` for `defineMemory({ provider })`: `recall` on `turn.started`, `capture` on `turn.completed`, and `tools` returning `search` and `remember`.
 |===
 
 `NamsEveMemoryOptions`:
@@ -344,8 +344,8 @@ Behavior:
   marked as data rather than instructions, with `<`, `>` and `&` escaped. It
   lists saved notes, then summaries (`getContext` reflections and observations)
   and query matches from up to `crossSessionLimit` earlier sessions, skipping
-  the current one. After a standalone compaction it has no query, so it lists
-  notes and summaries only. A replayed operation id returns the same result.
+  the current one. A replayed operation id returns the same result. eve 0.84.0
+  removed compaction recall, so the provider registers only `turn.started`.
 * *Capture* writes one bulk request per turn to the eve session's conversation,
   creating it on first use. A turn already at the end of the conversation is
   not written again, so a replay after a restart does not duplicate it.
@@ -353,9 +353,9 @@ Behavior:
   `{ results: [{ from, role, content, at }], workspaceGraph? }` from the
   scope's notes and earlier sessions (up to 10 conversations). `remember({ memory })`
   adds the note to the scope's notes conversation and returns
-  `{ remembered: true, memory }`. Both are built with eve's `defineTool` and
-  `defineDurableCallback`; the callback closure holds only the scope key, slot
-  and eve session id, never the API key.
+  `{ remembered: true, memory }`. Both are built with eve's `defineTool` as
+  plain functions over the scope key, slot and eve session id, never the API
+  key.
 * *Errors.* An `AuthenticationError` or a missing key fails the turn. Other
   recall errors are logged and the record says memory is unavailable. Capture
   and tool errors propagate to eve.
@@ -591,7 +591,7 @@ and the eve provider are chosen entirely in code.
 | `^2.0.0` — only needed for `toolsWithMcp()`, loaded lazily.
 
 | `eve` _(optional)_
-| `>=0.69.0` — only needed for the `/eve` entry point.
+| `>=0.84.0` — only needed for the `/eve` entry point.
 |===
 
 Requires Node.js 22 or newer (`engines.node: ">=22"`); the `/eve` entry point
