@@ -380,19 +380,11 @@ describe('recall', () => {
     expect(deep).toHaveLength(1);
   });
 
-  it('after a standalone compaction, recalls notes without searching', async () => {
-    nams.seed(ALICE, { kind: 'notes', said: ['Prefers aisle seats'] });
-    nams.seed(ALICE, { said: ['earlier message'] });
+  it('recalls only on turn.started, the one recall handler eve 0.84 accepts', () => {
     const provider = namsMemory({ apiKey: 'test-key' });
 
-    const result = await provider.recall['compaction.completed']!({
-      ...operation(ALICE, 's1', 'op-compaction'),
-      turn: null,
-      compaction: { modelId: 'test-model' },
-    } as never);
-
-    expect(result!.messages[0].content).toContain('Prefers aisle seats');
-    expect(nams.client.shortTerm.searchMessages).not.toHaveBeenCalled();
+    expect(Object.keys(provider.recall)).toEqual(['turn.started']);
+    expect(Object.keys(provider.capture ?? {})).toEqual(['turn.completed']);
   });
 });
 

@@ -78,12 +78,13 @@ npm install @neo4j-labs/nams-ai-provider@0.4.0 @neo4j-labs/agent-memory@0.6.0 ai
 
 The peer dependencies are `ai` `^7.0.0`, `zod` `^3.25.76 || ^4.1.8` and
 `@neo4j-labs/agent-memory` `~0.6.0`. This README describes the source, which
-is the 0.4.0 release against SDK 0.6.0. SDK 0.5.x is not supported — 0.5.0
-installs but fails against hosted NAMS: it sends `threshold` with every
-message search, which NAMS rejects with 400, and sends the conversation
-user filter as `user_id`, which NAMS ignores.Two optional peers are needed only for one feature each:
+is ahead of the 0.4.0 release: its eve provider needs eve 0.84.0 or later. SDK
+0.5.x is not supported — 0.5.0 installs but fails against hosted NAMS: it sends
+`threshold` with every message search, which NAMS rejects with 400, and sends
+the conversation user filter as `user_id`, which NAMS ignores.
+Two optional peers are needed only for one feature each:
 `@ai-sdk/mcp` `^2.0.0` for [MCP tool merging](#tools-mode-with-mcp-optional),
-and `eve` `>=0.69.0` for the [eve memory provider](#eve-memory-provider).
+and `eve` `>=0.84.0` for the [eve memory provider](#eve-memory-provider).
 
 **2. Get a free API key** at [memory.neo4jlabs.com](https://memory.neo4jlabs.com)
 
@@ -686,9 +687,8 @@ memory belongs to, asks the slot's provider to recall context before each turn
 and capture the turn after it, and gives the model the provider's tools.
 `@neo4j-labs/nams-ai-provider/eve` implements eve's
 [memory-provider contract](https://eve.dev/docs/memory/custom-provider) with
-NAMS. It needs eve 0.69.0 or later and Node.js 24, and is tested on eve 0.69.0,
-0.70.3, 0.71.0, 0.75.1, 0.77.0, 0.78.0 and 0.79.0. The entry point ships in the
-first provider release after 0.3.0 — release 0.4.0.
+NAMS. This source needs eve 0.84.0 or later and Node.js 24, and is tested on
+eve 0.84.0.
 
 ```bash
 npm install @neo4j-labs/nams-ai-provider@0.4.0 @neo4j-labs/agent-memory@0.6.0
@@ -709,7 +709,7 @@ export default defineMemory({
 
 | eve phase | What the provider does |
 |---|---|
-| Recall (`turn.started`, `compaction.completed`) | One record, id `nams-memory`: notes saved with `remember`, the summaries NAMS wrote about earlier sessions, messages from them that match the user's message, and the entities NAMS extracted from this user's conversations. Each turn's record replaces the last. |
+| Recall (`turn.started`) | One record, id `nams-memory`: notes saved with `remember`, the summaries NAMS wrote about earlier sessions, messages from them that match the user's message, and the entities NAMS extracted from this user's conversations. Each turn's record replaces the last. |
 | Capture (`turn.completed`) | The user's message and final answer, written to one NAMS conversation per eve session. NAMS extracts entities and writes summaries from it. |
 | Tools | `nams__search` finds messages in earlier sessions and notes, and this user's entities; `nams__remember` saves a note. Both are bound to the locked scope. |
 
@@ -726,10 +726,9 @@ process a replayed recall returns the record from the first call; after a
 restart the record is read from NAMS again, so it differs if the scope's memory
 changed in between, and eve then fails the turn. A replayed capture is detected
 by comparing the end of the session's conversation with the turn, also after a
-restart, and is not written twice. Each tool's `execute` is
-an eve durable callback whose closure is the scope key, slot and session id:
-eve's workflow bundler leaves it intact, and the client and API key never
-enter durable state.
+restart, and is not written twice. Each tool's `execute` is a plain function
+over the scope key, slot and session id; the client and API key never enter
+durable state.
 
 **Limits.** Entities written without a `userId`, for example by your own
 ingestion, are shared by the whole workspace. They are recalled only with

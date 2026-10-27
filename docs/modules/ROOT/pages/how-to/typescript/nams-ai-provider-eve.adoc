@@ -16,9 +16,8 @@ context that outlives a session.
 
 Prerequisites:
 
-* An eve project on eve 0.69.0 or later. Earlier releases do not run a
-  provider's capture handler after a completed turn. The provider is tested
-  on eve 0.69.0, 0.70.3, 0.71.0, 0.75.1, 0.77.0, 0.78.0 and 0.79.0.
+* An eve project on eve 0.84.0 or later, for the provider built from this
+  source. eve 0.84.0.
 * Node.js 24 or newer, which eve requires.
 * A `MEMORY_API_KEY` from https://memory.neo4jlabs.com[memory.neo4jlabs.com].
 
