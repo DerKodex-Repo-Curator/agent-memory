@@ -13,7 +13,7 @@
 <h1>Interface AgentMemoryMiddlewareOptions</h1></div>
 <div class="tsd-signature"><span class="tsd-signature-keyword">interface</span> <span class="tsd-kind-interface">AgentMemoryMiddlewareOptions</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#conversationid">conversationId</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> (<span class="tsd-signature-symbol">()</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">string</span>)<span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#historylimit">historyLimit</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#includecontext">includeContext</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#persistinput">persistInput</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#persistresponses">persistResponses</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#sessionid">sessionId</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> (<span class="tsd-signature-symbol">()</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">string</span>)<span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#userid">userId</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/neo4j-labs/agent-memory/blob/0672ffad4c0a312855c74c926abbb72363033f09/typescript/src/middleware/vercel-ai.ts#L65">middleware/vercel-ai.ts:65</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/DerKodex-Repo-Curator/agent-memory/blob/9d45af5529ecb5f2fe352013468a11087f3163d4/typescript/src/middleware/vercel-ai.ts#L65">middleware/vercel-ai.ts:65</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -39,14 +39,14 @@
 Can be a string or a function that returns one.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/neo4j-labs/agent-memory/blob/0672ffad4c0a312855c74c926abbb72363033f09/typescript/src/middleware/vercel-ai.ts#L70">middleware/vercel-ai.ts:70</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/DerKodex-Repo-Curator/agent-memory/blob/9d45af5529ecb5f2fe352013468a11087f3163d4/typescript/src/middleware/vercel-ai.ts#L70">middleware/vercel-ai.ts:70</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="historylimit"><code class="tsd-tag">Optional</code><span>history<wbr/>Limit</span><a href="#historylimit" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">historyLimit</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
 <div class="tsd-comment tsd-typography"><p>Maximum messages to include from flat history (bridge fallback).</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/neo4j-labs/agent-memory/blob/0672ffad4c0a312855c74c926abbb72363033f09/typescript/src/middleware/vercel-ai.ts#L89">middleware/vercel-ai.ts:89</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/DerKodex-Repo-Curator/agent-memory/blob/9d45af5529ecb5f2fe352013468a11087f3163d4/typescript/src/middleware/vercel-ai.ts#L89">middleware/vercel-ai.ts:89</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="includecontext"><code class="tsd-tag">Optional</code><span>include<wbr/>Context</span><a href="#includecontext" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">includeContext</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
@@ -55,21 +55,21 @@ If false, falls back to flat history. Default: true on REST, false on
 bridge (where context endpoints aren't implemented).</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/neo4j-labs/agent-memory/blob/0672ffad4c0a312855c74c926abbb72363033f09/typescript/src/middleware/vercel-ai.ts#L86">middleware/vercel-ai.ts:86</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/DerKodex-Repo-Curator/agent-memory/blob/9d45af5529ecb5f2fe352013468a11087f3163d4/typescript/src/middleware/vercel-ai.ts#L86">middleware/vercel-ai.ts:86</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="persistinput"><code class="tsd-tag">Optional</code><span>persist<wbr/>Input</span><a href="#persistinput" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">persistInput</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
 <div class="tsd-comment tsd-typography"><p>Attempt to persist user input before generation. Write failures are non-fatal. Default: true.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/neo4j-labs/agent-memory/blob/0672ffad4c0a312855c74c926abbb72363033f09/typescript/src/middleware/vercel-ai.ts#L92">middleware/vercel-ai.ts:92</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/DerKodex-Repo-Curator/agent-memory/blob/9d45af5529ecb5f2fe352013468a11087f3163d4/typescript/src/middleware/vercel-ai.ts#L92">middleware/vercel-ai.ts:92</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="persistresponses"><code class="tsd-tag">Optional</code><span>persist<wbr/>Responses</span><a href="#persistresponses" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">persistResponses</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
 <div class="tsd-comment tsd-typography"><p>Attempt to persist the assistant response. Read back storage to verify success. Default: true.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/neo4j-labs/agent-memory/blob/0672ffad4c0a312855c74c926abbb72363033f09/typescript/src/middleware/vercel-ai.ts#L95">middleware/vercel-ai.ts:95</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/DerKodex-Repo-Curator/agent-memory/blob/9d45af5529ecb5f2fe352013468a11087f3163d4/typescript/src/middleware/vercel-ai.ts#L95">middleware/vercel-ai.ts:95</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="sessionid"><code class="tsd-tag">Optional</code><span class="deprecated">session<wbr/>Id</span><a href="#sessionid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">sessionId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> (<span class="tsd-signature-symbol">()</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">string</span>)</div>
@@ -78,7 +78,7 @@ bridge (where context endpoints aren't implemented).</p>
 <h4 class="tsd-anchor-link" id="deprecated">Deprecated<a href="#deprecated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>Use <code>conversationId</code>. Kept for backwards compatibility.</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/neo4j-labs/agent-memory/blob/0672ffad4c0a312855c74c926abbb72363033f09/typescript/src/middleware/vercel-ai.ts#L73">middleware/vercel-ai.ts:73</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/DerKodex-Repo-Curator/agent-memory/blob/9d45af5529ecb5f2fe352013468a11087f3163d4/typescript/src/middleware/vercel-ai.ts#L73">middleware/vercel-ai.ts:73</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="userid"><code class="tsd-tag">Optional</code><span>user<wbr/>Id</span><a href="#userid" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">userId</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
@@ -86,7 +86,7 @@ bridge (where context endpoints aren't implemented).</p>
 <code>conversationId</code> is not supplied and the transport is REST.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/neo4j-labs/agent-memory/blob/0672ffad4c0a312855c74c926abbb72363033f09/typescript/src/middleware/vercel-ai.ts#L79">middleware/vercel-ai.ts:79</a></li></ul></aside></section></section></details></div>
+<li>Defined in <a href="https://github.com/DerKodex-Repo-Curator/agent-memory/blob/9d45af5529ecb5f2fe352013468a11087f3163d4/typescript/src/middleware/vercel-ai.ts#L79">middleware/vercel-ai.ts:79</a></li></ul></aside></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

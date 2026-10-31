@@ -13,7 +13,7 @@
 <h1>Interface RestTransportOptions</h1></div>
 <div class="tsd-signature"><span class="tsd-signature-keyword">interface</span> <span class="tsd-kind-interface">RestTransportOptions</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#apikey">apiKey</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#endpoint">endpoint</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#headers">headers</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#logger">logger</a><span class="tsd-signature-symbol">?:</span> <a href="../types/index.Logger.html" class="tsd-signature-type tsd-kind-type-alias">Logger</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#timeout">timeout</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#tokenprovider">tokenProvider</a><span class="tsd-signature-symbol">?:</span> <a href="../types/index.TokenProvider.html" class="tsd-signature-type tsd-kind-type-alias">TokenProvider</a><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/neo4j-labs/agent-memory/blob/0672ffad4c0a312855c74c926abbb72363033f09/typescript/src/transport/rest.ts#L50">transport/rest.ts:50</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/DerKodex-Repo-Curator/agent-memory/blob/9d45af5529ecb5f2fe352013468a11087f3163d4/typescript/src/transport/rest.ts#L50">transport/rest.ts:50</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -37,42 +37,42 @@
 <div class="tsd-comment tsd-typography"><p>Static <code>nams_*</code> API key.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/neo4j-labs/agent-memory/blob/0672ffad4c0a312855c74c926abbb72363033f09/typescript/src/transport/rest.ts#L55">transport/rest.ts:55</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/DerKodex-Repo-Curator/agent-memory/blob/9d45af5529ecb5f2fe352013468a11087f3163d4/typescript/src/transport/rest.ts#L55">transport/rest.ts:55</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="endpoint"><span>endpoint</span><a href="#endpoint" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">endpoint</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-comment tsd-typography"><p>Base URL — should end in /v1, e.g. <a href="https://memory.neo4jlabs.com/v1">https://memory.neo4jlabs.com/v1</a></p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/neo4j-labs/agent-memory/blob/0672ffad4c0a312855c74c926abbb72363033f09/typescript/src/transport/rest.ts#L52">transport/rest.ts:52</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/DerKodex-Repo-Curator/agent-memory/blob/9d45af5529ecb5f2fe352013468a11087f3163d4/typescript/src/transport/rest.ts#L52">transport/rest.ts:52</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="headers"><code class="tsd-tag">Optional</code><span>headers</span><a href="#headers" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">headers</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 <div class="tsd-comment tsd-typography"><p>Additional headers to include in every request.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/neo4j-labs/agent-memory/blob/0672ffad4c0a312855c74c926abbb72363033f09/typescript/src/transport/rest.ts#L64">transport/rest.ts:64</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/DerKodex-Repo-Curator/agent-memory/blob/9d45af5529ecb5f2fe352013468a11087f3163d4/typescript/src/transport/rest.ts#L64">transport/rest.ts:64</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="logger"><code class="tsd-tag">Optional</code><span>logger</span><a href="#logger" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">logger</span><span class="tsd-signature-symbol">?:</span> <a href="../types/index.Logger.html" class="tsd-signature-type tsd-kind-type-alias">Logger</a></div>
 <div class="tsd-comment tsd-typography"><p>Per-request logger; see <a href="../types/index.Logger.html" class="tsd-kind-type-alias">Logger</a>.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/neo4j-labs/agent-memory/blob/0672ffad4c0a312855c74c926abbb72363033f09/typescript/src/transport/rest.ts#L67">transport/rest.ts:67</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/DerKodex-Repo-Curator/agent-memory/blob/9d45af5529ecb5f2fe352013468a11087f3163d4/typescript/src/transport/rest.ts#L67">transport/rest.ts:67</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="timeout"><code class="tsd-tag">Optional</code><span>timeout</span><a href="#timeout" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">timeout</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
 <div class="tsd-comment tsd-typography"><p>Request timeout in milliseconds. Default: 30000.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/neo4j-labs/agent-memory/blob/0672ffad4c0a312855c74c926abbb72363033f09/typescript/src/transport/rest.ts#L61">transport/rest.ts:61</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/DerKodex-Repo-Curator/agent-memory/blob/9d45af5529ecb5f2fe352013468a11087f3163d4/typescript/src/transport/rest.ts#L61">transport/rest.ts:61</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="tokenprovider"><code class="tsd-tag">Optional</code><span>token<wbr/>Provider</span><a href="#tokenprovider" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">tokenProvider</span><span class="tsd-signature-symbol">?:</span> <a href="../types/index.TokenProvider.html" class="tsd-signature-type tsd-kind-type-alias">TokenProvider</a></div>
 <div class="tsd-comment tsd-typography"><p>Token provider (overrides apiKey if both supplied) — for OAuth refresh flows.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/neo4j-labs/agent-memory/blob/0672ffad4c0a312855c74c926abbb72363033f09/typescript/src/transport/rest.ts#L58">transport/rest.ts:58</a></li></ul></aside></section></section></details></div>
+<li>Defined in <a href="https://github.com/DerKodex-Repo-Curator/agent-memory/blob/9d45af5529ecb5f2fe352013468a11087f3163d4/typescript/src/transport/rest.ts#L58">transport/rest.ts:58</a></li></ul></aside></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
